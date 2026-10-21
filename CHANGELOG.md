@@ -648,7 +648,7 @@ Api.CreateResetFormsAction
 ApiResetFormsAction.GetClassType
 ApiResetFormsAction.GetNames / SetNames
 ApiResetFormsAction.IsAllExcept / SetAllExcept
-```
+
 
 ## 9.4.0
 
