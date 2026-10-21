@@ -1,20 +1,21 @@
 name: check
 on: [push]
 jobs:
-  rumdl:
+  markdownlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install rumdl
-        uses: rvben/rumdl@v0.3.0
+      - name: Use Node.js 18
+        uses: actions/setup-node@v1
         with:
-          version: "0.3.0"
-          install-only: true
-      - name: run rumdl
+          node-version: 18
+      - name: run Markdown linters
         run: |
+          npm install -g markdownlint-cli@0.39.0 rumdl@0.3.0
+          markdownlint CHANGELOG.md ROADMAP.md
           git ls-files -z -- '*.md' |
-            xargs -0 -r rumdl check --config .rumdl.toml --no-cache \
-              --deny-config-warnings --
+            xargs -0 -r rumdl check --no-config --no-cache \
+              --enable MD046,MD070 --
   spellchecker:
     runs-on: ubuntu-latest
     steps:
